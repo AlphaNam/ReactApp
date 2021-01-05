@@ -6,7 +6,8 @@ class ListMovieComponent extends Component {
         super(props)
 
         this.state = {
-                movies: []
+                movies: [],
+                cinemas:[]
         }
         this.addEmployee = this.addEmployee.bind(this);
         this.editEmployee = this.editEmployee.bind(this);
@@ -33,6 +34,9 @@ class ListMovieComponent extends Component {
     componentDidMount(){
         MovieService.getEmployees().then((res) => {
             this.setState({ movies: res.data});
+        });
+        MovieService.getCinemas().then((res) => {
+            this.setState({ cinemas: res.data});
         });
     }
 
@@ -79,7 +83,15 @@ class ListMovieComponent extends Component {
                         </table>
 
                  </div>
+                <div>
+                <h2 className="text-center">Cinemas List</h2>
+                
+                <h4>{this.state.cinemas.map(
+                    cinema =>
+                        <h5>- {cinema}</h5>
+                )}</h4>
 
+                </div>
             </div>
         )
     }
